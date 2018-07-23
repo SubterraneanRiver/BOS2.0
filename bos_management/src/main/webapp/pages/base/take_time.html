@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>收派时间管理</title>
+		<!-- 导入jquery核心类库 -->
+		<script type="text/javascript" src="../../js/jquery-1.8.3.js"></script>
+		<!-- 导入easyui类库 -->
+		<link rel="stylesheet" type="text/css" href="../../js/easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../../js/easyui/themes/icon.css">
+		<link rel="stylesheet" type="text/css" href="../../js/easyui/ext/portal.css">
+		<link rel="stylesheet" type="text/css" href="../../css/default.css">
+		<script type="text/javascript" src="../../js/easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="../../js/easyui/ext/jquery.portal.js"></script>
+		<script type="text/javascript" src="../../js/easyui/ext/jquery.cookie.js"></script>
+		<script src="../../js/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(function(){
+				// 先将body隐藏，再显示，不会出现页面刷新效果
+				$("body").css({visibility:"visible"});
+				
+				// 收派时间管理信息表格
+				$('#grid').datagrid( {
+					iconCls : 'icon-forward',
+					fit : true,
+					border : false,
+					rownumbers : true,
+					striped : true,
+					pageList: [30,50,100],
+					pagination : true,
+					toolbar : toolbar,
+					url : "../../data/take_time.json",
+					idField : 'id',
+					columns : columns
+				});
+				
+				
+				//保存定区信息
+				$("#save").click(function(){
+					
+					if($("#addTaketimeForm").form('validate')){
+						$("#addTaketimeForm").submit();
+						
+					}else{
+						
+						$.messager.alert("警告","表单存在非法数据","warning");
+					}
+					
+				});
+				
+			});	
+			
+			//工具栏
+			var toolbar = [ {
+				id : 'button-add',
+				text : '增加',
+				iconCls : 'icon-add',
+				handler : function(){
+					//alert('增加');
+					$("#addWindow").window('open');
+				}
+			}, {
+				id : 'button-edit',
+				text : '修改',
+				iconCls : 'icon-edit',
+				handler : function(){
+					alert('修改');
+				}
+			},{
+				id : 'button-delete',
+				text : '删除',
+				iconCls : 'icon-cancel',
+				handler : function(){
+					alert('删除');
+				}
+			} ];
+			
+			// 定义列
+			var columns = [ [ {
+				field : 'id',
+				checkbox : true,
+			},{
+				field : 'name',
+				title : '时间名称',
+				width : 120,
+				align : 'center'
+			}, {
+				field : 'normalWorkTime',
+				title : '平时上班时间',
+				width : 120,
+				align : 'center'
+			}, {
+				field : 'normalDutyTime',
+				title : '平时休息时间',
+				width : 120,
+				align : 'center'
+			}, {
+				field : 'satWorkTime',
+				title : '周六上班时间',
+				width : 120,
+				align : 'center'
+			}, {
+				field : 'satDutyTime',
+				title : '周六休息时间',
+				width : 120,
+				align : 'center'
+			}, {
+				field : 'sunWorkTime',
+				title : '周日上班时间',
+				width : 120,
+				align : 'center'
+			}, {
+				field : 'sunDutyTime',
+				title : '周日休息时间',
+				width : 120,
+				align : 'center'
+			}, {
+				field : 'status',
+				title : '状态',
+				width : 120,
+				align : 'center'
+			}, {
+				field : 'company',
+				title : '所属单位',
+				width : 120,
+				align : 'center'
+			} , {
+				field : 'operator',
+				title : '操作人',
+				width : 120,
+				align : 'center'
+			}, {
+				field : 'operatingTime',
+				title : '操作时间',
+				width : 120,
+				align : 'center'
+			}, {
+				field : 'operatingCompany',
+				title : '操作单位',
+				width : 120,
+				align : 'center'
+			} ] ];
+		</script>
+	</head>
+	<body class="easyui-layout" style="visibility:hidden;">
+		<div region="center" border="false">
+			<table id="grid"></table>
+		</div>
+		
+		<!-- 添加 修改时间 -->
+		<div class="easyui-window" title="时间添加修改" id="addWindow" collapsible="false" minimizable="false" maximizable="false" closed="true" style="top:20px;left:200px;width:400px;">
+			<div style="height:31px;overflow:hidden;" split="false" border="false">
+				<div class="datagrid-toolbar">
+					<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true">保存</a>
+				</div>
+			</div>
+
+			<div style="overflow:auto;padding:5px;" border="false">
+				<!-- 保存时间的信息 -->
+				<form id="addTaketimeForm" 
+				action="../../takeTime_save.action" method="post"> 
+					<table class="table-edit" width="80%" align="center">
+						<tr class="title">
+							<td colspan="2">添加收派时间</td>
+						</tr>
+						<tr>
+							<td>时间名称</td>
+							<td>
+								<input type="text" name="name" class="easyui-validatebox" required="true" />
+							</td>
+						</tr>
+						<tr>
+							<td>平常上班时间</td>
+							<td>
+								<input type="text" name="normalWorkTime" class="easyui-validatebox" required="true" />
+							</td>
+						</tr>
+						<tr>
+							<td>平常下班时间</td>
+							<td>
+								<input name="normalDutyTime" class="easyui-validatebox" required="true"/>
+							</td>
+						</tr>
+						<tr>
+							<td>周六上班时间</td>
+							<td>
+								<input name="satWorkTime" class="easyui-validatebox" required="true"/>
+							</td>
+						</tr>
+						<tr>
+							<td>周六下班时间</td>
+							<td>
+								<input name="satDutyTime" class="easyui-validatebox" required="true"/>
+							</td>
+						</tr>
+						<tr>
+							<td>周日上班时间</td>
+							<td>
+								<input name="sunWorkTime" class="easyui-validatebox" required="true"/>
+							</td>
+						</tr>
+						<tr>
+							<td>周日下班时间</td>
+							<td>
+								<input name="sunDutyTime" class="easyui-validatebox" required="true"/>
+							</td>
+						</tr>
+						
+					</table>
+				</form>
+			</div>
+		</div>
+		
+	</body>
+</html>

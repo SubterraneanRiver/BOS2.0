@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--	<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+<script type="text/javascript" src="../jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../jquery.easyui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">-->
+		<title>我的页面</title>
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<!-- 导入jquery核心类库 -->
+		<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+		<!-- 导入easyui类库 -->
+		<link id="easyuiTheme" rel="stylesheet" type="text/css" href="../js/easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css">
+		<link rel="stylesheet" type="text/css" href="../css/default.css">
+		<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
+		<!-- 导入ztree类库 -->
+
+		<link rel="stylesheet" href="../js/ztree/zTreeStyle.css" type="text/css" />
+		<script src="../js/ztree/jquery.ztree.all-3.5.js" type="text/javascript"></script>
+		<script src="../js/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(function() {
+
+				$("#c1").click(function() {
+					$("#mytabs").tabs('add', {
+						title: '新的面板',
+						content: '新面板的内容'
+
+					});
+				});
+			});
+			
+			$(function() {
+				//1开启简单数据格式
+				var setting={
+					data:{
+						simpleData:{
+							enable:true//支持简单的数据格式
+						}
+					}
+					
+				}
+			//2提供树形菜单结构数据
+			
+			var zNodes=[
+			{id:1,pId:0,name:'父节点一'},
+			{id:2,pId:0,name:'父节点二'},
+			{id:11,pId:1,name:'子节点一'},
+			{id:12,pId:1,name:'子节点二'},
+			{id:21,pId:2,name:'子节点一'},
+			{id:22,pId:2,name:'子节点二'},
+			
+			];
+			//3生成树形菜单
+			
+			$.fn.zTree.init($("#bt"),setting,zNodes);
+			
+			});
+			
+		</script>
+
+	</head>
+
+	<body class="easyui-layout">
+
+		<div data-options="region:'north',title:'lz窗口界面'" style="height:100px;">北部</div>
+		<div data-options="region:'west',title:'菜单导航'" style="width: 200px;">
+			<!--设置折叠面板部分内容-->
+			<div class="easyui-accordion" data-options="fit:true">
+				<div data-options="title:'树形菜单一'">
+				<!--通过ztree插件制作树形菜单-->
+				<url id="bt" class="ztree"></url>
+				
+				</div>
+				<div data-options="title:'菜单二'">
+					面板一
+					<br />
+					<a href="javascript:void(0)" id="c1">控制一</a>
+					<p>控制二</p>
+
+				</div>
+			</div>
+		</div>
+		<div data-options="region:'center',title:'待选菜单'">
+			<!--设置选项卡面板-->
+			<div class="easyui-tabs" data-options="fit:true" id="mytabs">
+
+				<div data-options="title:'选项卡一',closable:true">选冬瓜</div>
+				<div data-options="title:'选项卡二',closable:true">选西瓜</div>
+
+			</div>
+		</div>
+		<div data-options="region:'east'" style="width: 50px;">东部</div>
+		<div data-options="region:'south'" style="height: 100px;">南部</div>
+	</body>
+
+</html>
