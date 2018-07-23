@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		// 切割支字符串1，2，3
 //首先判断传上来的数组是否为空的
-		if(StringUtils.isBlank(customerIdStr)){
+		if(StringUtils.isBlank(customerIdStr)||"null".equalsIgnoreCase(customerIdStr)){
 			return;  //如果为空就直接结束
 		}
 		
