@@ -20,4 +20,7 @@
 	
 	<context:property-placeholder location="classpath:config.properties" />
 	
+	<!-- 引入spring-data-redis的配置文件 -->
+	<import resource="applicationContext-cache.xml"/>
+	
 </beans>
