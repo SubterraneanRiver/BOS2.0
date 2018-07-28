@@ -16,8 +16,10 @@
 		<script src="../../js/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			$(function() {
+				//alert("加载表格");
 				// 宣传任务表格			
 				$("#grid").datagrid({
+					url:"../../promotion_pageQuery.action",//访问的地址
 					columns: [
 						[{
 							field: 'id',
@@ -31,14 +33,22 @@
 						}, {
 							field: 'titleImg',
 							title: '宣传图片',
-							width: 200
+							width: 200,
+							formatter:function(value,row,index){
+								//对返回值进行处理显示图片时间
+								return "<img src='"+value+"' width='150' height='100' />";
+							}
 						},{
 							field: 'startDate',
 							title: '发布时间',
 							width: 100
+						/* 	formatter:function(value,row,index){
+								return value.replace("T","");
+								
+							} */
 						}, {
 							field: 'endDate',
-							title: '实效时间',
+							title: '失效时间',
 							width: 100
 						}, {
 							field: 'updateTime',
@@ -58,7 +68,8 @@
 							width: 100
 						}]
 					],
-					pagination: true,
+					pagination: true,//显示分页条
+					
 					toolbar: [{
 							id: 'searchBtn',
 							text: '查询',

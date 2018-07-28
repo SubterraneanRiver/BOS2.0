@@ -24,10 +24,10 @@ bosfore_app.controller("ctrlRead", ['$scope', '$http', function($scope, $http) {
 
 		$http({
 			method: 'GET',
-			url: 'data/promotion' + page + '.json',
-			params: {
-				"page": page,
-				"pageSize": $scope.pageSize
+			url: 'promotion_pageQuery.action',
+			params: {    //ajax异步请求的请求参数
+				"page": page,//当前的页码
+				"rows": $scope.pageSize  //每页的记录数
 			}
 		}).success(function(data, status, headers, config) {
 			// 显示表格数据 
