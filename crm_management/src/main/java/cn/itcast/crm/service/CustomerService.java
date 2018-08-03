@@ -33,5 +33,12 @@ public interface CustomerService {
 			@QueryParam("customerIdStr") String customerIdStr,
 			@QueryParam("fixedAreaId") String fixedAreaId);
 	
+	//用户登录信息的验证
+	@Path("customer/login")
+	@GET
+	@Produces({"application/xml","application/json"})
+	public Customer login(
+			@QueryParam("telephone") String telephone,
+			@QueryParam("password") String password);
 	
 }

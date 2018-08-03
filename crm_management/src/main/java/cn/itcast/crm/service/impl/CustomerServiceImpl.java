@@ -44,5 +44,12 @@ public class CustomerServiceImpl implements CustomerService {
 			customerRepository.updateFixedAreaId(fixedAreaId, id);
 		}
 	}
+	@Override
+	public Customer login(String telephone, String password) {
+		
+		
+		return customerRepository.findByTelephoneAndPassword(
+				telephone,password);
+	}
 
 }

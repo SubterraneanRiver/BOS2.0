@@ -13,16 +13,27 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<!-- 配置webService服务 -->
+	<servlet>
+<servlet-name>CXFService</servlet-name>
+<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+<load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+<servlet-name>CXFService</servlet-name>
+<url-pattern>/services/*</url-pattern>
+</servlet-mapping>
+	
 	
 	<!-- struts2 过滤器 -->
 	<filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
     </filter>
-
+<!-- 这里要改变一下拦截方式，否者会出问题 -->
     <filter-mapping>
         <filter-name>struts2</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.action</url-pattern>
     </filter-mapping>
     
 	<welcome-file-list>

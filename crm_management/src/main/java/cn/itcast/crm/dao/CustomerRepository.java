@@ -23,6 +23,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	@Query("update Customer set fixedAreaId = null where fixedAreaId=?")
 	@Modifying   //要想修改成功必须执行该操作，否则只能进行查询
 	public void clearFixedAreaId(String fixedAreaId);
+
+	public Customer findByTelephoneAndPassword(String telephone, String password);
 	
 	
 
