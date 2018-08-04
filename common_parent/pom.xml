@@ -248,10 +248,12 @@
 			<version>0.3.1</version>
 		</dependency>
 		
+		<!-- pinying4j的坐标 -->
 		<dependency>
 			<groupId>com.belerweb</groupId>
 			<artifactId>pinyin4j</artifactId>
 			<version>2.5.0</version>
+			
 		</dependency>
 
 
@@ -272,7 +274,18 @@
     <artifactId>quartz-jobs</artifactId>
     <version>2.2.1</version>
   </dependency> 
-		
+		<!--阿里大鱼短信接口 -->
+<dependency>
+  <groupId>com.aliyun</groupId>
+  <artifactId>aliyun-java-sdk-core</artifactId>
+  <version>3.7.1</version> 
+</dependency>
+<dependency>
+<groupId>com.aliyun</groupId>
+<artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+<version>1.1.0</version>
+</dependency>
+
 		
 	</dependencies>
 
