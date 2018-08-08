@@ -87,9 +87,9 @@
 					rownumbers : true,
 					striped : true,
 					toolbar : toolbar,
-					url : "../../data/users.json",
+					url : "../../user_list.action",
 					idField : 'id', 
-					frozenColumns : frozenColumns,
+					frozenColumns : frozenColumns,//冻结窗口，设置
 					columns : columns,
 					onClickRow : onClickRow,
 					onDblClickRow : doDblClickRow
@@ -109,13 +109,19 @@
 			}
 			
 			function doAdd() {
+				
 				location.href="../../pages/system/userinfo.html";
+			
 			}
 		
 			function doView() {
 				var item = $('#grid').datagrid('getSelected');
+				
+				
 				console.info(item);
 				//window.location.href = "edit.html";
+				
+				
 			}
 		
 			function doDelete() {
@@ -124,11 +130,25 @@
 				for(var i=0; i<items.length; i++){
 				    ids.push(items[i].id);	    
 				}
-					
 				console.info(ids.join(","));
+				//进行删除操作
+				//$.post()
+					
+                $("input[name='deletID']").val(ids);
 				
-				$('#grid').datagrid('reload');
-				$('#grid').datagrid('uncheckAll');
+				//验证输入的内容，提交表单
+				if(ids.length>0){
+					
+					$("#mainForm").submit();
+					$('#grid').datagrid('reload');
+					$('#grid').datagrid('uncheckAll');
+				}else{
+					
+					$.messager.alert("警告","需至少选中一项","warning");
+				}
+							
+				
+				
 			}
 		</script>
 	</head>
@@ -136,6 +156,12 @@
 	<body class="easyui-layout" style="visibility:hidden;">
 		<div region="center" border="false">
 			<table id="grid"></table>
+			
+			<form id="mainForm" method="post" action="../../user_delete.action">
+				<input type="hidden" id="delete" name="deletID" />
+				
+			</form>
+			
 		</div>
 	</body>
 

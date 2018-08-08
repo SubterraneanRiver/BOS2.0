@@ -48,6 +48,7 @@ public class CustomerAction extends BaseAction<Customer> {
 			
 			System.out.println("短信的发送结果" + message);
 			// 在这里不用返回值
+			
 			return NONE;
 		} else {
 			throw new RuntimeException("短信发生失败,信息码为" + message);
