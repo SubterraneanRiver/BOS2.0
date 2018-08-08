@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>BootStrap+AngularJs的分页展示</title>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/angular.min.js"></script>
+		<script type="text/javascript" src="../js/angular-route.min.js"></script>
+		<link rel="stylesheet" href="../css/bootstrap/bootstrap.css" />
+		<script type="text/javascript" src="../js/bootstrap.js"></script>
+
+	</head>
+
+	<body ng-app="paginationApp" ng-controller="paginationCtrl">
+
+		<table class="table table-bordered">
+			<tr>
+				<td>序号</td>
+				<td>商品编号</td>
+				<td>商品的名称</td>
+				<td>商品的价格</td>
+			</tr>
+
+			<tr ng-repeat="product in products">
+				<td>{{$index+1}}</td>
+				<td>{{product.id}}</td>
+				<td>{{product.name}}</td>
+				<td>{{product.price}}</td>
+			</tr>
+
+		</table>
+
+		<div>
+			<ul class="pagination pull-right">
+				<li>
+					<a href ng-click="prev()">上一页</a>
+				</li>
+				<li ng-repeat="page in pageList" ng-class="{active:isActivePage(page)}">
+					<a href ng-click="selectPage(page)">{{page}}</a>
+
+				</li>
+				<li>
+					<a href ng-click="next()">下一页</a>
+				</li>
+			</ul>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		var paginationApp = angular.module("paginationApp", []);
+		paginationApp.controller("paginationCtrl", ["$scope", "$http", function($scope, $http) {
+			//分页所需要的变量
+			$scope.currentPage = 1;
+			$scope.pageSize = 4;
+			$scope.totalCount = 0; //总记录数
+			$scope.totalPages = 0; //总页数
+
+			//要在分页工具条上所显示的页码
+			$scope.pageList = new Array();
+
+			//加载上一页数据
+			$scope.prev = function() {
+				$scope.selectPage($scope.currentPage - 1); //到上一页的方法
+
+			}
+			//加载下一页数据
+			$scope.next = function() {
+				$scope.selectPage($scope.currentPage + 1);
+			}
+			//加载指定页面的数据的方法
+			$scope.selectPage = function(page){
+				//如果页面超出范围
+				if($scope.totalPages!=0 && (page<1 || page>$scope.totalPages)){
+					return;
+				}
+			
+				$http({
+					method: 'GET',
+					url: '9_'+page+'.json',//这里将其变成动态页面
+					params: {
+							page:page,
+							pageSize:$scope.pageSize
+					}
+
+				}).success(function(data, status, headers, config) {
+					$scope.products = data.products;
+					//根据总记录数计算总页数
+					$scope.totalCount = data.totalCount;
+					$scope.totalPages = Math.ceil($scope.totalCount/$scope.pageSize);
+					
+					//更新当前显示的页码
+					$scope.currentPage = page;
+					//显示分页工具条中的页码
+					var begin;//显示的第一个页码
+					var end;//显示的最后一个页码
+					
+					begin = $scope.currentPage -5;
+					if(begin<1){
+						begin = 1;
+					}
+					
+					//显示10个页码，理论上end是begin+9;
+					end = begin+9;
+					if(end>$scope.totalPages){
+						end = $scope.totalPages;
+					}
+					
+					//修正begin的值
+					begin = end -9;
+					if(begin<1){
+						begin = 1;
+					}
+					//将页码加入pageList集合
+					for(var i = begin;i<=end;i++){
+						$scope.pageList.push(i);
+					}
+					
+					
+				}).error(function(data, status, headers, config) {
+					//报错时弹出
+					alert("出错，请联系管理员");
+				});
+				
+				
+				}//selectPage方法在这里结束
+
+
+			//判断是否为当前页
+			$scope.isActivePage =function(page){
+				return page === $scope.currentPage;
+			}
+//初始化的时候选中第一页
+$scope.selectPage(1);
+		}
+		]);
+	</script>
+
+</html>

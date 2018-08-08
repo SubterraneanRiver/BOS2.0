@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.multipart.maxSize" value="301972800"></constant>
+
+
+  <!--   <package name="default" namespace="/" extends="struts-default">
+        
+        <action name="up" class="com.lz.action.UploadAction" method="uploadFile">
+        
+        <result name="input">error.jsp</result>
+        
+        </action>
+        <action name="up" class="com.lz.action.UploadActionMang" method="uploadFile">
+        
+        <result name="input">error.jsp</result>
+        
+        </action>
+    </package> -->
+    
+   
+
+   
+
+</struts>

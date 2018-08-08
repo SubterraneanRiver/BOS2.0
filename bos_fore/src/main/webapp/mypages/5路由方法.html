@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>遍历</title>
+		<script type="text/javascript" src="../js/angular.min.js"></script>
+		<script type="text/javascript" src="../js/angular-route.min.js"></script>
+
+	</head>
+
+	<body ng-app="myapp">
+
+		<div>
+			<h1>这是头部</h1>
+			<a href="#/java">java</a>
+			<a href="#/ios">ios</a>
+			<a href="#/Android">Android</a>
+		</div>
+		<div ng-view>
+			这是要变化的部分
+		</div>
+		<div>
+			<h1>这是尾部</h1>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var myapp = angular.module("myapp", ["ngRoute"]);
+		//配置模块路由
+		myapp.config(["$routeProvider", function($routeProvider) {
+
+			$routeProvider
+				.when('/java', {
+					templateUrl: '6.html'
+				}).when('/ios', {
+					templateUrl: '7.html'
+				}).when('/Android', {
+					templateUrl: '8.html'
+				}).otherwise({
+					redirectTo:'/java'
+				});
+
+		}]);
+	</script>
+
+</html>

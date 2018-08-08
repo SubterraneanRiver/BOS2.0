@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>事件的操作mvc</title>
+		<script type="text/javascript" src="../js/angular.min.js"></script>
+		<script type="text/javascript" src="../js/angular-route.min.js"></script>
+
+	</head>
+
+	<body>
+		<div ng-app="myapp" ng-controller="myctrl">
+			
+			<!--这是模型的内容-->
+			<div>
+				<input type="text" name="name" ng-model="name" />
+				<input type="button" value="清空" ng-click="name=' '"/>
+			</div>
+			<!--这是view表现层的内容 -->
+			<div>
+ 				<table ng-bind="name">hello,</table>
+			</div>
+
+		</div>
+<!--控制器内容的实现-->
+			<script type="text/javascript">
+				var myapp=angular.module("myapp",[]);
+				//定义控制器,完成依赖注入,scope是作用域对象
+				myapp.controller("myctrl",["$scope",function($scope){
+					
+					$scope.name="老大的";
+					
+					//点击事件
+				$scope.clearVal = function(){
+						$scope.name="";//将内容清空
+					}
+					
+				}]);
+				
+			</script>
+	</body>
+
+</html>
