@@ -4,3 +4,4 @@
 /crm_domain/target
 /bos_domain/target
 /bos_fore/src/main/java/cn/itcast/bos/utils/SmsDayuUtils.java
+/bos_sms/src/main/java/com/lz/bos/utis/SmsDayuUtils.java

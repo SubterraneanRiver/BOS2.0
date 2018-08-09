@@ -7,7 +7,7 @@ public class Constants {
 	//这个跑的tomcat:run
 	private static final String CRM_MANAGMENT_HOST = "http://localhost:9002";
 	
-	private static final String BOS_FORE_HOST="http://localhost:9002";
+	private static final String BOS_FORE_HOST="http://localhost:9003";
 	
 	
 	

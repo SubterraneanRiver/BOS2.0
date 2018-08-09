@@ -32,7 +32,7 @@ public class TransitInfo {
 
 	@OneToMany
 	@JoinColumn(name = "C_TRANSIT_INFO_ID")
-	@OrderColumn(name = "C_IN_OUT_INDEX")    //使存储的内容有序的注解
+	@OrderColumn(name = "C_IN_OUT_INDEX")    //JPA的注解使存储的内容有序的注解
 	private List<InOutStorageInfo> inOutStorageInfos = new ArrayList<InOutStorageInfo>();
 
 	@OneToOne

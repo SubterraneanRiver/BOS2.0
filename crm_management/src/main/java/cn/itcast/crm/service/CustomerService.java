@@ -2,7 +2,9 @@ package cn.itcast.crm.service;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -40,5 +42,22 @@ public interface CustomerService {
 	public Customer login(
 			@QueryParam("telephone") String telephone,
 			@QueryParam("password") String password);
+	
+	
+	//用户注册的方法
+	@Path("customer")
+	@POST
+	@Consumes({"application/xml","application/json"})
+	public void regist(Customer customer);
+	
+	//查询用户情况
+	@Path("customer/telephone/{telephone}")
+	@GET
+	@Consumes({"application/xml","application/json"})
+	public Customer findByTelephone(@PathParam("telephone") String telephone);
+	
+	@Path("customer/updatetype/{telephone}")
+	@GET
+	public void updataType(@PathParam("telephone") String telephone);
 	
 }

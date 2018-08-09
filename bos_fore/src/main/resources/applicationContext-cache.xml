@@ -38,13 +38,13 @@
         <property name="testOnBorrow" value="true" />  
     </bean>  
 	<!-- jedis的连接工厂 -->
-	<bean id="connectionFactory"  
+	<bean id="redisconnectionFactory"  
         class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"  
         p:host-name="localhost" p:port="6379" p:pool-config-ref="poolConfig"  
         p:database="0" />  
         <!-- Spring data提供的redis模版 -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">  
-        <property name="connectionFactory" ref="connectionFactory" /> 
+        <property name="connectionFactory" ref="redisconnectionFactory" /> 
         <!-- 这里面的值是可以指定的，不指定的话默认就是下面的值 -->
         <property name="keySerializer">
             <!-- 这一个是指定可以值的 -->
@@ -53,9 +53,10 @@
              -->
             <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
         </property>
+        
         <property name="valueSerializer">
         <!-- 这一个是指定value值的 -->
-        	<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" /> 
+        	<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" /> 
         </property> 
     </bean>  
 	
